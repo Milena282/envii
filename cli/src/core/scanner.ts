@@ -225,3 +225,20 @@ export function buildFingerprintMap(projects: Project[]): Map<string, string> {
   }
   return map;
 }
+
+/**
+ * Build name-to-path map from scanned projects (for fallback matching)
+ */
+export function buildNameMap(projects: Project[]): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const project of projects) {
+    // Use project name as key (lowercase for case-insensitive matching)
+    map.set(project.name.toLowerCase(), project.path);
+    // Also map folder name for additional matching
+    const folderName = project.path.split('/').pop()?.toLowerCase();
+    if (folderName && !map.has(folderName)) {
+      map.set(folderName, project.path);
+    }
+  }
+  return map;
+}
