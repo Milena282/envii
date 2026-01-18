@@ -1,0 +1,129 @@
+const steps = [
+  {
+    number: "01",
+    title: "Initialize",
+    description:
+      "Run envii init to generate or enter your 12-word recovery phrase. This creates your unique vault.",
+    code: `$ envii init
+
+🔐 Generating recovery phrase...
+
+Your recovery phrase:
+  stone pond season stumble happy
+  endless riot pass slice reduce
+  aware forget
+
+⚠️  SAVE THIS PHRASE SECURELY
+   It's the ONLY way to restore your backups!
+
+✓ Vault created: c557eec8...`,
+  },
+  {
+    number: "02",
+    title: "Backup",
+    description:
+      "Navigate to your projects folder and run backup. Envii finds all .env files and encrypts them.",
+    code: `$ cd ~/projects
+$ envii backup
+
+✓ Found 8 projects
+
+  ✓ my-api (3 env files)
+  ✓ frontend (2 env files)  
+  ✓ backend (1 env file)
+  ...
+
+Size: 11 KB (compressed: 4.7 KB)
+
+✓ Backup complete
+  Backup ID: bkp_8f07d168dd44`,
+  },
+  {
+    number: "03",
+    title: "Restore",
+    description:
+      "On a new machine, clone your projects, then restore. Envii matches projects by fingerprint and restores files.",
+    code: `$ cd ~/projects
+$ envii restore
+
+✓ Downloaded backup from 1/18/2026
+✓ Decrypted successfully
+
+Found 8 projects in backup
+
+✓ my-api → /Users/dev/projects/my-api
+✓ frontend → /Users/dev/projects/frontend
+✓ backend → /Users/dev/projects/backend
+
+Restored 6 of 6 files`,
+  },
+];
+
+export function HowItWorks() {
+  return (
+    <section className="relative py-24 border-t border-zinc-800 bg-zinc-900/50">
+      <div className="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-zinc-800 via-zinc-800 to-transparent hidden lg:block" />
+
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Three commands. That's it.
+          </h2>
+          <p className="mt-4 text-lg text-zinc-400 max-w-2xl mx-auto">
+            No configuration files. No setup wizards. Just simple CLI commands.
+          </p>
+        </div>
+
+        <div className="space-y-16">
+          {steps.map((step, index) => (
+            <div
+              key={step.number}
+              className={`flex flex-col lg:flex-row gap-8 items-start ${
+                index % 2 === 1 ? "lg:flex-row-reverse" : ""
+              }`}
+            >
+              {/* Text content */}
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-5xl font-bold text-zinc-800 font-mono">
+                    {step.number}
+                  </span>
+                  <div className="h-px flex-1 bg-gradient-to-r from-zinc-700 to-transparent" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-zinc-400 text-lg leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+
+              <div className="flex-1 w-full relative">
+                <div className="absolute -top-1 -left-1 w-3 h-3 border-l border-t border-emerald-500/40" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 border-r border-t border-emerald-500/40" />
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l border-b border-emerald-500/40" />
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r border-b border-emerald-500/40" />
+
+                <div className="border border-zinc-800 bg-zinc-950">
+                  <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 border-b border-zinc-800">
+                    <span className="text-xs text-zinc-600 font-mono">
+                      terminal
+                    </span>
+                    <div className="flex gap-2">
+                      <div className="w-2 h-2 bg-zinc-700" />
+                      <div className="w-2 h-2 bg-zinc-700" />
+                      <div className="w-2 h-2 bg-zinc-700" />
+                    </div>
+                  </div>
+                  <pre className="p-4 text-sm font-mono text-zinc-300 overflow-x-auto">
+                    <code>{step.code}</code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
