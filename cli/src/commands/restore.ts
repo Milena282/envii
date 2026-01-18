@@ -5,6 +5,7 @@ import { createApiClient } from "../core/api.js";
 import {
   scanDirectory,
   buildFingerprintMap,
+  buildNameMap,
   Project,
 } from "../core/scanner.js";
 import {
@@ -111,18 +112,29 @@ export async function restoreCommand(options: RestoreOptions): Promise<void> {
     const cwd = process.cwd();
     const { projects: localProjects } = await scanDirectory(cwd);
     const fingerprintMap = buildFingerprintMap(localProjects);
+    const nameMap = buildNameMap(localProjects);
 
-    // Match projects
+    // Match projects (fingerprint first, then fallback to name)
     const matched: Array<{
       backupProject: BackupBlob["projects"][0];
       localPath: string;
+      matchType: "fingerprint" | "name";
     }> = [];
     const unmatched: BackupBlob["projects"] = [];
 
     for (const project of blob.projects) {
-      const localPath = fingerprintMap.get(project.fingerprint);
+      // Try fingerprint match first
+      let localPath = fingerprintMap.get(project.fingerprint);
+      let matchType: "fingerprint" | "name" = "fingerprint";
+
+      // Fallback to name-based matching
+      if (!localPath) {
+        localPath = nameMap.get(project.name.toLowerCase());
+        matchType = "name";
+      }
+
       if (localPath) {
-        matched.push({ backupProject: project, localPath });
+        matched.push({ backupProject: project, localPath, matchType });
       } else {
         unmatched.push(project);
       }
@@ -135,8 +147,9 @@ export async function restoreCommand(options: RestoreOptions): Promise<void> {
     // Show matched projects
     if (matched.length > 0) {
       logger.newline();
-      for (const { backupProject, localPath } of matched) {
-        logger.success(`${backupProject.name} → ${localPath}`);
+      for (const { backupProject, localPath, matchType } of matched) {
+        const suffix = matchType === "name" ? chalk.dim(" (matched by name)") : "";
+        logger.success(`${backupProject.name} → ${localPath}${suffix}`);
       }
     }
 
